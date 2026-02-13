@@ -72,7 +72,8 @@
             font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
           }
-          .marquee {
+
+  .marquee {
   overflow: hidden;
   width: 100%;
 }
@@ -727,27 +728,28 @@ a,
     
   </div>
 </div>
-
-
 <script>
 const track = document.getElementById("marqueeTrack");
 
 track.innerHTML += track.innerHTML;
 
 let position = 0;
-let speed = 0.9;
-function animateMarquee() {
+const speed = 0.9;
+const totalWidth = track.scrollWidth / 2;
+
+function animate() {
   position -= speed;
-  if (Math.abs(position) >= track.scrollWidth / 2) {
-    position = 0;
+  if (position <= -totalWidth) {
+    position += totalWidth;
   }
 
   track.style.transform = `translateX(${position}px)`;
-  requestAnimationFrame(animateMarquee);
+  requestAnimationFrame(animate);
 }
 
-animateMarquee();
+animate();
 </script>
+
 
 <!--             <div class="logos-bottom-row">
               <div fs-marquee-type="static" fs-marquee-element="marquee" fs-marquee-instance="logos-slider" class="logos-slider_instance">
